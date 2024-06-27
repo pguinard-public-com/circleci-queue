@@ -241,8 +241,8 @@ fetch() {
 cancel_build_num(){
     BUILD_NUM="$1"
     echo "Cancelling build ${BUILD_NUM}"
-    cancel_api_url_template="${CIRCLECI_BASE_URL}/api/v1.1/project/${VCS_TYPE}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${BUILD_NUM}/cancel?circle-token=${CCI_TOKEN}"
-    curl -s -X POST "$cancel_api_url_template" > /dev/null
+    cancel_api_url_template="${CIRCLECI_BASE_URL}/api/v2/project/${VCS_TYPE}/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/job/${BUILD_NUM}/cancel"
+    curl --user "${CCI_TOKEN}" --silent --request POST "$cancel_api_url_template" > /dev/null
 }
 
 
